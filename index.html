@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101113">
+<title>AUDI RS7 PERFORMANCE</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --bg: #101113;
+  --panel: #17191c;
+  --text: #f4f4f4;
+  --muted: #92969d;
+  --red: #e21d36;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background:
+    radial-gradient(ellipse at 75% 15%, #282a2d 0%, transparent 38%),
+    var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header {
+  height: 76px;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  z-index: 20;
+  width: 100%;
+  top: 0;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 5px;
+}
+
+.logo span {
+  color: var(--red);
+}
+
+nav {
+  display: flex;
+  gap: 30px;
+}
+
+nav a {
+  color: #aaa;
+  font-size: 12px;
+  transition: .3s;
+}
+
+nav a:hover {
+  color: white;
+}
+
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 110px 6% 70px;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  width: 40%;
+}
+
+.eyebrow {
+  color: var(--red);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 7vw, 100px);
+  line-height: .92;
+  font-weight: 900;
+  letter-spacing: -5px;
+}
+
+.hero h1 span {
+  color: var(--red);
+}
+
+.hero h2 {
+  font-size: 21px;
+  font-weight: 500;
+  color: #aaa;
+  margin-top: 15px;
+}
+
+.hero-description {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 25px;
+}
+
+.hero-image {
+  position: absolute;
+  width: 76%;
+  right: -8%;
+  top: 12%;
+  z-index: 1;
+  animation: heroEnter 1.5s ease both;
+}
+
+.hero-image img {
+  width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 35px 35px #000b);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 55%, transparent 100%);
+  mask-image: radial-gradient(ellipse at center, #000 55%, transparent 100%);
+}
+
+@keyframes heroEnter {
+  from {
+    opacity: 0;
+    transform: translateX(100px) scale(.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.stats {
+  display: flex;
+  gap: 28px;
+  margin-top: 42px;
+}
+
+.stat {
+  border-left: 1px solid #444;
+  padding-left: 16px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 23px;
+}
+
+.stat small {
+  display: block;
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 10px;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 3px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: .35; }
+}
+
+/* SECTIONS */
+
+.chapter {
+  min-height: 100vh;
+  padding: 110px 7%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse at 65% 50%, #292b2e 0%, transparent 48%),
+    var(--bg);
+}
+
+.chapter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, transparent 70%);
+  z-index: -1;
+}
+
+.chapter-content {
+  width: 38%;
+  position: relative;
+  z-index: 3;
+}
+
+.chapter-number {
+  color: var(--red);
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+.chapter h2 {
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.05;
+  margin-bottom: 22px;
+}
+
+.chapter p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+  max-width: 410px;
+}
+
+.chapter-image {
+  position: absolute;
+  width: 75%;
+  right: -8%;
+  top: 50%;
+  transform: translateY(-50%) translateX(70px) scale(.94);
+  opacity: 0;
+  transition:
+    opacity 1s ease,
+    transform 1.3s cubic-bezier(.2,.7,.2,1);
+  z-index: 1;
+}
+
+.chapter-image img {
+  width: 100%;
+  max-height: 78vh;
+
+
+object-fit: contain;
+  filter: drop-shadow(0 35px 35px #000c);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 52%, transparent 100%);
+  mask-image: radial-gradient(ellipse at center, #000 52%, transparent 100%);
+}
+
+.chapter.visible .chapter-image {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0) scale(1);
+}
+
+.chapter.visible .chapter-content {
+  animation: textEnter .9s ease both;
+}
+
+@keyframes textEnter {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detail-line {
+  width: 45px;
+  height: 3px;
+  background: var(--red);
+  margin-bottom: 24px;
+}
+
+.more {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 13px 22px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  transition: .3s;
+}
+
+.more:hover {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+/* ENGINE */
+
+.engine {
+  background:
+    radial-gradient(ellipse at 25% 55%, #303236 0%, transparent 40%),
+    var(--bg);
+}
+
+.engine .chapter-image {
+  width: 58%;
+  right: 0;
+}
+
+/* INTERIOR */
+
+.interior .chapter-image {
+  width: 85%;
+  right: -10%;
+}
+
+/* SPECS */
+
+.specs {
+  min-height: 100vh;
+  padding: 120px 7%;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 80% 40%, #282a2d 0%, transparent 45%),
+    var(--bg);
+}
+
+.specs h2 {
+  font-size: clamp(38px, 5vw, 64px);
+  margin-bottom: 15px;
+}
+
+.specs-intro {
+  color: var(--muted);
+  margin-bottom: 50px;
+}
+
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 45px;
+  max-width: 800px;
+  position: relative;
+  z-index: 2;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 19px 0;
+  border-bottom: 1px solid #333;
+  font-size: 13px;
+}
+
+.spec-row span {
+  color: var(--muted);
+}
+
+.spec-row strong {
+  text-align: right;
+}
+
+.spec-car {
+  position: absolute;
+  width: 60%;
+  right: -5%;
+  bottom: 0;
+  opacity: .8;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 30%);
+  mask-image: linear-gradient(90deg, transparent, #000 30%);
+}
+
+.spec-car img {
+  width: 100%;
+  filter: drop-shadow(0 20px 25px #000);
+}
+
+footer {
+  padding: 35px 7%;
+  color: #666;
+  font-size: 11px;
+  border-top: 1px solid #292929;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* MOBILE */
+
+max-width: 700px {
+  header {
+    height: 65px;
+    padding: 0 5%;
+  }
+
+  .logo {
+    font-size: 19px;
+  }
+
+  nav {
+    gap: 13px;
+  }
+
+  nav a {
+    font-size: 9px;
+  }
+
+  nav a:nth-child(2),
+  nav a:nth-child(4) {
+    display: none;
+  }
+
+  .hero {
+    min-height: 100svh;
+    align-items: flex-start;
+    padding: 130px 6% 60px;
+  }
+
+  .hero-content {
+    width: 100%;
+  }
+
+  .hero h1 {
+    font-size: 57px;
+    letter-spacing: -3px;
+  }
+
+  .hero-image {
+    width: 125%;
+    top: 37%;
+    right: -22%;
+  }
+
+  .hero-description {
+    font-size: 12px;
+    max-width: 250px;
+  }
+
+  .stats {
+    gap: 13px;
+    margin-top: 25px;
+  }
+
+  .stat {
+    padding-left: 9px;
+  }
+
+  .stat strong {
+    font-size: 17px;
+  }
+
+  .stat small {
+    font-size: 8px;
+  }
+
+  .chapter {
+    min-height: 90svh;
+    padding: 75px 7% 40px;
+    align-items: flex-start;
+  }
+
+  .chapter-content {
+    width: 100%;
+    padding-top: 10px;
+  }
+
+  .chapter h2 {
+    font-size: 36px;
+    max-width: 300px;
+  }
+
+  .chapter p {
+    font-size: 12px;
+    max-width: 290px;
+  }
+
+  .chapter-image,
+  .engine .chapter-image,
+  .interior .chapter-image {
+    width: 125%;
+    right: -22%;
+    top: 62%;
+  }
+
+  .chapter-image img {
+    max-height: 48vh;
+  }
+
+  .specs {
+    padding: 90px 7% 250px;
+    min-height: 100svh;
+  }
+
+  .spec-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .spec-row {
+    font-size: 11px;
+  }
+
+  .spec-car {
+    width: 115%;
+    right: -20%;
+    bottom: 0;
+  }
+
+  footer {
+    padding: 25px 7%;
+    font-size: 9px;
+  }
+}
+
+prefers-reduced-motion: reduce {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+
+
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="#" class="logo">AUDI<span>.</span></a>
+
+  <nav>
+    <a href="#model">Модель</a>
+    <a href="#exterior">Экстерьер</a>
+    <a href="#engine">Двигатель</a>
+    <a href="#interior">Салон</a>
+    <a href="#specs">Характеристики</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+
+<section class="hero" id="model">
+
+  <div class="hero-content">
+    <div class="eyebrow">AUDI SPORT / PERFORMANCE</div>
+
+    <h1>AUDI <span>RS7</span></h1>
+
+    <h2>C8 PERFORMANCE</h2>
+
+    <p class="hero-description">
+      Максимальная динамика.
+
+      Без компромиссов.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>630</strong>
+        <small>ЛОШАДИНЫХ СИЛ</small>
+      </div>
+
+      <div class="stat">
+        <strong>850</strong>
+        <small>Н·М</small>
+      </div>
+
+      <div class="stat">
+        <strong>3.4</strong>
+        <small>0–100 КМ/Ч</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="images/hero.png" alt="Audi RS7 Performance">
+  </div>
+
+  <div class="scroll-hint">SCROLL TO EXPLORE ↓</div>
+</section>
+
+<!-- EXTERIOR -->
+
+<section class="chapter" id="exterior">
+  <div class="chapter-content">
+    <div class="chapter-number">01 / EXTERIOR</div>
+    <div class="detail-line"></div>
+
+    <h2>Выразительный
+дизайн</h2>
+
+    <p>
+      Audi RS7 Performance — сочетание спортивного
+      характера и элегантности. Широкая решётка
+      радиатора, агрессивные воздухозаборники
+      и выразительные линии кузова.
+    </p>
+
+    <a href="#engine" class="more">ДАЛЕЕ →</a>
+  </div>
+
+  <div class="chapter-image">
+    <img src="images/front.png" alt="Передняя часть Audi RS7">
+  </div>
+</section>
+
+<!-- SIDE -->
+
+<section class="chapter">
+  <div class="chapter-content">
+    <div class="chapter-number">02 / SILHOUETTE</div>
+    <div class="detail-line"></div>
+
+    <h2>Спортивный
+силуэт</h2>
+
+    <p>
+      Длинный капот, ниспадающая линия крыши
+      и широкие колёсные арки формируют
+      узнаваемый силуэт RS7 Sportback.
+    </p>
+  </div>
+
+  <div class="chapter-image">
+    <img src="images/side.png" alt="Audi RS7 сбоку">
+  </div>
+</section>
+
+<!-- REAR -->
+
+<section class="chapter">
+  <div class="chapter-content">
+    <div class="chapter-number">03 / REAR DESIGN</div>
+    <div class="detail-line"></div>
+
+    <h2>Характер
+в каждой детали</h2>
+
+    <p>
+      Световая полоса задних фонарей,
+      спортивный диффузор и овальные
+      патрубки выхлопной системы.
+    </p>
+  </div>
+
+  <div class="chapter-image">
+    <img src="images/rear.png" alt="Задняя часть Audi RS7">
+  </div>
+</section>
+
+<!-- ENGINE -->
+
+<section class="chapter engine" id="engine">
+  <div class="chapter-content">
+    <div class="chapter-number">04 / ENGINE</div>
+    <div class="detail-line"></div>
+
+    <h2>4.0 TFSI
+V8 Biturbo</h2>
+
+    <p>
+      Мощный восьмицилиндровый двигатель
+      с двумя турбинами. 630 лошадиных сил
+      и 850 Н·м крутящего момента.
+      Мощность, которая ощущается в каждой детали.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>630</strong>
+        <small>Л.С.</small>
+      </div>
+
+      <div class="stat">
+        <strong>850</strong>
+        <small>Н·М</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter-image">
+    <img src="images/engine.png" alt="Двигатель V8 Audi RS7">
+  </div>
+</section>
+
+<!-- INTERIOR -->
+
+<section class="chapter interior" id="interior">
+  <div class="chapter-content">
+    <div class="chapter-number">05 / INTERIOR</div>
+    <div class="detail-line"></div>
+
+    <h2>Технологии
+и комфорт</h2>
+
+    <p>
+      Спортивный интерьер, цифровая приборная
+      панель Audi Virtual Cockpit, мультимедийная
+      система и премиальные материалы отделки.
+    </p>
+  </div>
+
+  <div class="chapter-image">
+    <img src="images/interior.png" alt="Салон Audi RS7">
+  </div>
+</section>
+
+<!-- SPECIFICATIONS -->
+
+<section class="specs" id="specs">
+
+  <div class="chapter-number">06 / TECHNICAL DATA</div>
+
+  <h2>Характеристики</h2>
+
+  <p class="specs-intro">
+    AUDI RS7 C8 PERFORMANCE
+  </p>
+
+  <div class="spec-grid">
+
+    <div>
+
+
+<div class="spec-row">
+        <span>Двигатель</span>
+        <strong>4.0 TFSI V8 Biturbo</strong>
+      </div>
+
+      <div class="spec-row">
+        <span>Объём</span>
+        <strong>3996 см³</strong>
+      </div>
+
+      <div class="spec-row">
+        <span>Мощность</span>
+        <strong>630 л.с.</strong>
+      </div>
+
+      <div class="spec-row">
+        <span>Крутящий момент</span>
+        <strong>850 Н·м</strong>
+      </div>
+
+      <div class="spec-row">
+        <span>Привод</span>
+        <strong>quattro</strong>
+      </div>
+    </div>
+
+    <div>
+      <div class="spec-row">
+        <span>Разгон 0–100 км/ч</span>
+        <strong>3,4 секунды</strong>
+      </div>
+
+      <div class="spec-row">
+        <span>Коробка передач</span>
+        <strong>8-ступенчатый Tiptronic</strong>
+      </div>
+
+      <div class="spec-row">
+        <span>Максимальная скорость</span>
+        <strong>280 км/ч</strong>
+      </div>
+
+      <div class="spec-row">
+        <span>Тип кузова</span>
+        <strong>Sportback</strong>
+      </div>
+
+      <div class="spec-row">
+        <span>Цвет проекта</span>
+        <strong>Nardo Grey</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="spec-car">
+    <img src="images/rear.png" alt="">
+  </div>
+
+</section>
+
+<footer>
+  <div>AUDI RS7 PERFORMANCE</div>
+  <div>DESIGNED FOR PERFORMANCE</div>
+</footer>
+
+<script>
+/* ПЛАВНОЕ ПОЯВЛЕНИЕ СЕКЦИЙ */
+
+const sections = document.querySelectorAll('.chapter');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {
+  threshold: 0.25
+});
+
+sections.forEach(section => observer.observe(section));
+
+/* ЛЁГКОЕ ДВИЖЕНИЕ ФОТОГРАФИЙ ПРИ ПРОКРУТКЕ */
+
+let ticking = false;
+
+function updateParallax() {
+  const center = window.innerHeight / 2;
+
+  document.querySelectorAll('.chapter').forEach(section => {
+    const image = section.querySelector('.chapter-image');
+    if (!image) return;
+
+    const rect = section.getBoundingClientRect();
+    const distance = (rect.top + rect.height / 2 - center) / window.innerHeight;
+
+    const movement = Math.max(-24, Math.min(24, distance * -28));
+
+    image.style.setProperty('--parallax', movement + 'px');
+    image.style.marginTop = movement + 'px';
+  });
+
+  ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(updateParallax);
+    ticking = true;
+  }
+}, { passive: true });
+
+updateParallax();
+</script>
+
+</body>
+</html>
